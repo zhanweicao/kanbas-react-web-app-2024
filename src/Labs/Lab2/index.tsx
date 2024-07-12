@@ -5,6 +5,7 @@ import Dimensions from "./Dimensions";
 import ForegroundColors from "./ForegroundColors";
 import Margins from "./Margins";
 import Padding from "./Padding";
+import Positions from "./Positions";
 import "./index.css";
 
 export default function Lab2() {
@@ -66,6 +67,7 @@ export default function Lab2() {
   <Margins/>
   <Corners/>
   <Dimensions/>
+  <Positions/>
 </div>
 
     </div>
