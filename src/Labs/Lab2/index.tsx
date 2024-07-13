@@ -1,5 +1,7 @@
 import BlackgroundColors from "./BlackgroundColors";
+import BootstrapForms from "./BootstrapForms";
 import BootstrapGrids from "./BootstrapGrids";
+import BootstrapLists from "./BootstrapLists";
 import BootstrapTables from "./BootstrapTables";
 import Borders from "./Borders";
 import Corners from "./Corners";
@@ -51,41 +53,43 @@ export default function Lab2() {
         </h4>
       </div>
       <div id="wd-css-document-structure">
-  <div className="wd-selector-1">
-    <h3>Document structure selectors</h3>
-    <div className="wd-selector-2">
-      Selectors can be combined to refer elements in particular
-      places in the document
-      <p className="wd-selector-3">
-        This paragraph's red background is referenced as
-        <br />
-        .selector-2 .selector3<br />
-        meaning the descendant of some ancestor.<br />
-        <span className="wd-selector-4">
-          Whereas this span is a direct child of its parent
-        </span><br />
-          You can combine these relationships to create specific 
-          styles depending on the document structure
-      </p>
-    </div>
-  </div>
-  <ForegroundColors/>
-  <BlackgroundColors/>
-  <Borders/>
-  <Padding/>
-  <Margins/>
-  <Corners/>
-  <Dimensions/>
-  <Positions/>
-  <Zindex/>
-  <Float/>
-  <GridLayout/>
-  <Flex/>
-  <ReactIconsSampler/>
-  <BootstrapGrids/>
-  <ScreenSizeLabel/>
-  <BootstrapTables/>
-</div>  
+        <div className="wd-selector-1">
+          <h3>Document structure selectors</h3>
+          <div className="wd-selector-2">
+            Selectors can be combined to refer elements in particular
+            places in the document
+            <p className="wd-selector-3">
+              This paragraph's red background is referenced as
+              <br />
+              .selector-2 .selector3<br />
+              meaning the descendant of some ancestor.<br />
+              <span className="wd-selector-4">
+                Whereas this span is a direct child of its parent
+              </span><br />
+              You can combine these relationships to create specific
+              styles depending on the document structure
+            </p>
+          </div>
+        </div>
+        <ForegroundColors />
+        <BlackgroundColors />
+        <Borders />
+        <Padding />
+        <Margins />
+        <Corners />
+        <Dimensions />
+        <Positions />
+        <Zindex />
+        <Float />
+        <GridLayout />
+        <Flex />
+        <ReactIconsSampler />
+        <BootstrapGrids />
+        <ScreenSizeLabel />
+        <BootstrapTables />
+        <BootstrapLists />
+        <BootstrapForms/>
+      </div>
     </div>
   );
 }
