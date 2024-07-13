@@ -1,5 +1,6 @@
 import BlackgroundColors from "./BlackgroundColors";
 import BootstrapGrids from "./BootstrapGrids";
+import BootstrapTables from "./BootstrapTables";
 import Borders from "./Borders";
 import Corners from "./Corners";
 import Dimensions from "./Dimensions";
@@ -83,6 +84,7 @@ export default function Lab2() {
   <ReactIconsSampler/>
   <BootstrapGrids/>
   <ScreenSizeLabel/>
+  <BootstrapTables/>
 </div>  
     </div>
   );
