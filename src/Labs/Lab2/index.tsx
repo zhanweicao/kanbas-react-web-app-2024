@@ -1,4 +1,5 @@
 import BlackgroundColors from "./BlackgroundColors";
+import BootstrapGrids from "./BootstrapGrids";
 import Borders from "./Borders";
 import Corners from "./Corners";
 import Dimensions from "./Dimensions";
@@ -9,12 +10,15 @@ import GridLayout from "./GridLayout";
 import Margins from "./Margins";
 import Padding from "./Padding";
 import Positions from "./Positions";
+import ReactIcons from "./ReactIconsSampler";
+import ReactIconsSampler from "./ReactIconsSampler";
+import ScreenSizeLabel from "./ScreenSizeLabel";
 import Zindex from "./Zindex";
 import "./index.css";
 
 export default function Lab2() {
   return (
-    <div id="wd-lab2">
+    <div className="container-fluid" id="wd-lab2">
       <h2>Lab 2 - Cascading Style Sheets</h2>
       <h3>Styling with the STYLE attribute</h3>
       <p /*style={{ backgroundColor: "blue", color: "white" }} */>
@@ -76,8 +80,10 @@ export default function Lab2() {
   <Float/>
   <GridLayout/>
   <Flex/>
-</div>
-
+  <ReactIconsSampler/>
+  <BootstrapGrids/>
+  <ScreenSizeLabel/>
+</div>  
     </div>
   );
 }
