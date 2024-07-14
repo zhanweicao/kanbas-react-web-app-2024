@@ -1,5 +1,6 @@
 import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
+import { IoBan } from "react-icons/io5";
 
 export default function ModulesControls() {
     return (
@@ -29,13 +30,13 @@ export default function ModulesControls() {
                     </li>
                     <li>
                         <a id="wd-unpublish-all-modules-and-items" className="dropdown-item" href="#">
-                            <GreenCheckmark />
+                            <IoBan style={{ top: "4px" }} className="text-black me-1 fs-6"/>
                             Unpublish all modules and items
                         </a>
                     </li>
                     <li>
                         <a id="wd-unpublish-modules-only" className="dropdown-item" href="#">
-                            <GreenCheckmark />
+                        <IoBan style={{ top: "4px" }} className="text-black me-1 fs-6"/>
                             Unpublish modules only
                         </a>
                     </li>
