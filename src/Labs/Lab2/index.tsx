@@ -2,6 +2,7 @@ import BlackgroundColors from "./BlackgroundColors";
 import BootstrapForms from "./BootstrapForms";
 import BootstrapGrids from "./BootstrapGrids";
 import BootstrapLists from "./BootstrapLists";
+import BootstrapNavigation from "./BootstrapNavigation";
 import BootstrapTables from "./BootstrapTables";
 import Borders from "./Borders";
 import Corners from "./Corners";
@@ -89,6 +90,7 @@ export default function Lab2() {
         <BootstrapTables />
         <BootstrapLists />
         <BootstrapForms/>
+        <BootstrapNavigation/>
       </div>
     </div>
   );
