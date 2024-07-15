@@ -15,13 +15,13 @@ export default function Grades() {
                     Apply Filters
                 </button>
             </div>
-            <br /> 
+            <br />
             <div id="wd-grade-table" className="table-responsive">
                 <table className="table table-bordered">
                     <thead className="table-secondary">
                         <tr>
                             <th><b>Student Names</b></th>
-                            <th><b>A1 SETUP</b></th>
+                            <th style={{ width: '150px' }}><b>A1 SETUP</b></th>
                             <th><b>A2 HTML</b></th>
                             <th><b>A3 CSS</b></th>
                             <th><b>A4 BOOTSTRAP</b></th>
@@ -30,42 +30,42 @@ export default function Grades() {
                     <tbody>
                         <tr className="table-light">
                             <td>Jane Adams</td>
-                            <td><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
+                            <td style={{ width: '150px' }}><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
                             <td>96.67%</td>
                             <td>92.18%</td>
                             <td>66.22%</td>
                         </tr>
                         <tr className="table-white">
                             <td>Christina Alllen</td>
-                            <td><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
+                            <td style={{ width: '150px' }}><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
                             <td>96.67%</td>
                             <td>92.18%</td>
                             <td>66.22%</td>
                         </tr>
                         <tr className="table-light">
                             <td>Samreen Ansari</td>
-                            <td><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
+                            <td style={{ width: '150px' }}><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
                             <td>96.67%</td>
                             <td>92.18%</td>
                             <td>66.22%</td>
                         </tr>
                         <tr className="table-white">
                             <td>Han Bao</td>
-                            <td><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
+                            <td style={{ width: '150px' }}><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
                             <td>96.67%</td>
                             <td>92.18%</td>
                             <td>66.22%</td>
                         </tr>
                         <tr className="table-light">
                             <td>Mahi Sai Srinivas Bobbili</td>
-                            <td><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
+                            <td style={{ width: '150px' }}><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
                             <td>96.67%</td>
                             <td>92.18%</td>
                             <td>66.22%</td>
                         </tr>
                         <tr className="table-white">
                             <td>Siran Cao</td>
-                            <td><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
+                            <td style={{ width: '150px' }}><input type="text" defaultValue="100%" className="form-control form-control-sm" /></td>
                             <td>96.67%</td>
                             <td>92.18%</td>
                             <td>66.22%</td>
