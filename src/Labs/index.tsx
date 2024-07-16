@@ -13,7 +13,7 @@ export default function Labs() {
                 <Route path="/" element={<Navigate to="Lab1" />} />
                 <Route path="Lab1" element={<Lab1 />} />
                 <Route path="Lab2" element={<Lab2 />} />
-                <Route path="Lab3" element={<Lab3 />} />
+                <Route path="Lab3/*" element={<Lab3 />} />
             </Routes>
             <h4>My Github Repository</h4>
             <a id="wd-github" href="https://github.com/zhanweicao/kanbas-react-web-app-2024">Github</a>
