@@ -7,6 +7,7 @@ import AssignmentEditor from "./Assignments/Editor";
 import Grades from "./Grades";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
+import Dashboard from "../Dashboard";
 export default function Courses() {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
@@ -15,7 +16,6 @@ export default function Courses() {
     <div id="wd-courses">
       <h2 className="text-danger">
         <FaAlignJustify className="me-4 fs-4 mb-1" />
-        Test
         {course && course.name} &gt; {pathname.split("/")[4]}
       </h2>
       <hr />
@@ -23,6 +23,8 @@ export default function Courses() {
       <div>
         <Routes>
           {/* <Route path="/" element={<Navigate to="Home" />} /> */}
+          <Route path="Dashboard" element={<Dashboard />} />
+          <Route path="Courses/:cid/*" element={<Courses />} />
           <Route path="Home" element={<Home />} />
           <Route path="Modules" element={<Modules />} />
           <Route path="Assignments" element={<Assignments />} />
