@@ -59,7 +59,7 @@ export default function CoursesNavigation() {
       </a>
       <a
         id="wd-course-grades-link"
-        href="#/Kanbas/Courses/1234/Grades"
+        href={`#/Kanbas/Courses/${course?._id}/Grades`}
         className="list-group-item text-danger border border-0"
       >
         Grades
