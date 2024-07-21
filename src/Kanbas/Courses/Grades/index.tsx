@@ -8,29 +8,22 @@ import { enrollments } from "../../Database";
 import { assignments } from "../../Database";
 
 export default function Grades() {
-    const { cid } = useParams(); // 课程ID
-
-    // 获取选定课程的学生ID
+    const { cid } = useParams(); 
     const enrolledStudentsIds = enrollments
         .filter(enrollment => enrollment.course === cid)
         .map(enrollment => enrollment.user);
 
-    // 获取这些学生的详细信息
     const courseStudents = users.filter(user => enrolledStudentsIds.includes(user._id));
 
-    // 获取选定课程的所有作业
     const courseAssignments = assignments.filter(assignment => assignment.course === cid);
 
-    // 获取所有学生在各个作业上的成绩
     const courseGrades = grades.filter(grade => enrolledStudentsIds.includes(grade.student));
 
-    // 为每个作业标题创建一个映射
     const assignmentTitles = courseAssignments.reduce((acc, assignment) => {
         acc[assignment._id] = assignment.title;
         return acc;
     }, {} as { [key: string]: string });
 
-    // 组织每个学生的成绩数据
     const studentGrades = courseStudents.map(student => {
         const gradesForStudent = courseAssignments.reduce((acc, assignment) => {
             const grade = courseGrades.find(g => g.student === student._id && g.assignment === assignment._id);

@@ -31,14 +31,14 @@ export default function CoursesNavigation() {
       </a>
       <a
         id="wd-course-piazza-link"
-        href="#/Kanbas/Courses/1234/Piazza"
+        href={`#/Kanbas/Courses/${course?._id}/Grades`}
         className="list-group-item text-danger border border-0"
       >
         Piazza
       </a>
       <a
         id="wd-course-zoom-link"
-        href="#/Kanbas/Courses/1234/Zoom"
+        href={`#/Kanbas/Courses/${course?._id}/Zoom`}
         className="list-group-item text-danger border border-0"
       >
         Zoom
@@ -52,7 +52,7 @@ export default function CoursesNavigation() {
       </a>
       <a
         id="wd-course-assignments-link"
-        href="#/Kanbas/Courses/1234/Quizzes"
+        href={`#/Kanbas/Courses/${course?._id}/Quizzes`}
         className="list-group-item text-danger border border-0"
       >
         Quizzes
