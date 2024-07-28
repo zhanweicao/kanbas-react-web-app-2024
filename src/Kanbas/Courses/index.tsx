@@ -1,4 +1,4 @@
-import { courses } from "../Database";
+
 import CoursesNavigation from "./Navigation";
 import Modules from "./Modules";
 import Home from "./Home";
@@ -8,7 +8,7 @@ import Grades from "./Grades";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 import Dashboard from "../Dashboard";
-export default function Courses() {
+export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
@@ -26,8 +26,8 @@ export default function Courses() {
         <div className="flex-fill">
           <Routes>
             {/* <Route path="/" element={<Navigate to="Home" />} /> */}
-            <Route path="Dashboard" element={<Dashboard />} />
-            <Route path="Courses/:cid/*" element={<Courses />} />
+            {/* <Route path="Dashboard" element={<Dashboard />} /> */}
+            {/* <Route path="Courses/:cid/*" element={<Courses />} />  */}
             <Route path="Home" element={<Home />} />
             <Route path="Modules" element={<Modules />} />
             <Route path="Piazza" element={<h1>Piazza</h1>} />
