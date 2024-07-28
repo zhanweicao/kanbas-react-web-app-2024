@@ -19,18 +19,23 @@ export default function Courses() {
         {course && course.name} &gt; {pathname.split("/")[4]}
       </h2>
       <hr />
-      <CoursesNavigation />
-      <div>
-        <Routes>
-          {/* <Route path="/" element={<Navigate to="Home" />} /> */}
-          <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="Courses/:cid/*" element={<Courses />} />
-          <Route path="Home" element={<Home />} />
-          <Route path="Modules" element={<Modules />} />
-          <Route path="Assignments" element={<Assignments />} />
-          <Route path="Assignments/:aid" element={<AssignmentEditor />} />
-          <Route path="Grades" element={<Grades />} />
-        </Routes>
+      <div className="d-flex">
+        <div className="d-none d-md-block">
+          <CoursesNavigation />
+        </div>
+        <div className="flex-fill">
+          <Routes>
+            {/* <Route path="/" element={<Navigate to="Home" />} /> */}
+            <Route path="Dashboard" element={<Dashboard />} />
+            <Route path="Courses/:cid/*" element={<Courses />} />
+            <Route path="Home" element={<Home />} />
+            <Route path="Modules" element={<Modules />} />
+            <Route path="Piazza" element={<h1>Piazza</h1>} />
+            <Route path="Assignments" element={<Assignments />} />
+            <Route path="Assignments/:aid" element={<AssignmentEditor />} />
+            <Route path="Grades" element={<Grades />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );
