@@ -1,23 +1,22 @@
 import { useParams, useNavigate } from "react-router";
-import { assignments } from "../../Database";
+import { useSelector, useDispatch } from "react-redux";
 import { BsGripVertical } from "react-icons/bs";
 import { RxTriangleDown } from 'react-icons/rx';
 import { SlNote } from "react-icons/sl";
 import AssignmentControl from "./AssignmentControl";
 import AssignmentControlButton from "./AssignmentControlButton";
-import LessonControlButtons from "../Modules/LessonControlButtons";
-import React, { useState } from "react";
-import * as db from "../../Database";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   const { cid } = useParams();
   const navigate = useNavigate();
-  const [assignments, setAssignments] = useState<any[]>(db.assignments);
+  const dispatch = useDispatch();
+  const assignments = useSelector((state: any) => state.assignmentsReducer.assignments);
   const [showModal, setShowModal] = useState(false);
   const [assignmentToDelete, setAssignmentToDelete] = useState<string | null>(null);
-  
-  const courseAssignments = assignments.filter((assignment) => assignment.course === cid);
+  const courseAssignments = assignments.filter((assignment: any) => assignment.course === cid);
 
   const handleDeleteClick = (assignmentId: string) => {
     setAssignmentToDelete(assignmentId);
@@ -26,7 +25,7 @@ export default function Assignments() {
 
   const handleConfirmDelete = () => {
     if (assignmentToDelete) {
-      setAssignments(assignments.filter((a) => a._id !== assignmentToDelete));
+      dispatch(deleteAssignment(assignmentToDelete));
       setAssignmentToDelete(null);
       setShowModal(false);
     }
@@ -52,7 +51,7 @@ export default function Assignments() {
       </div>
 
       <ul id="wd-assignment-list" className="list-group">
-        {courseAssignments.map((assignment) => (
+        {courseAssignments.map((assignment: any) => (
           <li
             key={assignment._id}
             className="wd-assignment-list-item list-group-item p-3 ps-1 rounded-0 border-4 border-top-0 border-end-0 border-bottom-0 border-success"
