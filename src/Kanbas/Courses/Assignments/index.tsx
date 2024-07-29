@@ -10,7 +10,7 @@ import { Modal, Button } from "react-bootstrap";
 import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
-  const { cid } = useParams();
+  const { cid } = useParams<{ cid: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const assignments = useSelector((state: any) => state.assignmentsReducer.assignments);

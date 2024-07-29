@@ -2,11 +2,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateAssignment, addAssignment } from "./reducer";
 import { useState, useEffect } from "react";
-import AssignmentControl from "./AssignmentControl";
 import { BsGripVertical } from "react-icons/bs";
 import { RxTriangleDown } from "react-icons/rx";
 
-export default function Editor() {
+export default function AssignmentEditor() {
   const { cid, aid } = useParams<{ cid: string, aid: string }>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,9 +39,12 @@ export default function Editor() {
     navigate(`/Kanbas/Courses/${cid}/Assignments`);
   };
 
+  const handleCancel = () => {
+    navigate(`/Kanbas/Courses/${cid}/Assignments`);
+  };
+
   return (
     <div id="wd-assignments-editor">
-      <AssignmentControl />
       <br />
       <br />
 
@@ -129,7 +131,7 @@ export default function Editor() {
 
         <div className="row mb-3 justify-content-end">
           <div className="col-sm-1">
-            <button className="btn" onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}>Cancel</button>
+            <button className="btn" onClick={handleCancel}>Cancel</button>
           </div>
           <div className="col-sm-1">
             <button className="btn btn-danger" onClick={handleSave}>Save</button>

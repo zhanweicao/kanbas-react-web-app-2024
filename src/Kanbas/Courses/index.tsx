@@ -3,7 +3,7 @@ import CoursesNavigation from "./Navigation";
 import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
-import AssignmentEditor from "./Assignments/Editor";
+import AssignmentEditor from "./Assignments/AssignmentEditor";
 import Grades from "./Grades";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
