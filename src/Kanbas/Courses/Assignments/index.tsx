@@ -1,15 +1,41 @@
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { assignments } from "../../Database";
 import { BsGripVertical } from "react-icons/bs";
-import { RxTriangleDown } from 'react-icons/rx'
+import { RxTriangleDown } from 'react-icons/rx';
 import { SlNote } from "react-icons/sl";
 import AssignmentControl from "./AssignmentControl";
 import AssignmentControlButton from "./AssignmentControlButton";
 import LessonControlButtons from "../Modules/LessonControlButtons";
+import React, { useState } from "react";
+import * as db from "../../Database";
+import { Modal, Button } from "react-bootstrap";
 
 export default function Assignments() {
   const { cid } = useParams();
+  const navigate = useNavigate();
+  const [assignments, setAssignments] = useState<any[]>(db.assignments);
+  const [showModal, setShowModal] = useState(false);
+  const [assignmentToDelete, setAssignmentToDelete] = useState<string | null>(null);
+  
   const courseAssignments = assignments.filter((assignment) => assignment.course === cid);
+
+  const handleDeleteClick = (assignmentId: string) => {
+    setAssignmentToDelete(assignmentId);
+    setShowModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (assignmentToDelete) {
+      setAssignments(assignments.filter((a) => a._id !== assignmentToDelete));
+      setAssignmentToDelete(null);
+      setShowModal(false);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setAssignmentToDelete(null);
+    setShowModal(false);
+  };
 
   return (
     <div id="wd-assignments">
@@ -17,26 +43,18 @@ export default function Assignments() {
       <br />
       <br />
 
-      <div
-        id="wd-assignment-title"
-        className="wd-title d-flex justify-content-between  p-3 ps-2 bg-secondary"
-      >
+      <div id="wd-assignment-title" className="wd-title d-flex justify-content-between p-3 ps-2 bg-secondary">
         <span>
           <BsGripVertical className="me-2 fs-3" />
           <RxTriangleDown />
           ASSIGNMENTS
-        </span>
-        <span style={{ display: "inline-flex" }}>
-          <span id="wd-assignment-title-percentage" className="px-2">
-            40% of Total
-          </span>
-          <AssignmentControlButton />
         </span>
       </div>
 
       <ul id="wd-assignment-list" className="list-group">
         {courseAssignments.map((assignment) => (
           <li
+            key={assignment._id}
             className="wd-assignment-list-item list-group-item p-3 ps-1 rounded-0 border-4 border-top-0 border-end-0 border-bottom-0 border-success"
           >
             <div className="d-flex justify-content-center align-items-center">
@@ -47,6 +65,7 @@ export default function Assignments() {
               <a
                 className="wd-assignment-link text-decoration-none fw-bold text-black"
                 href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
+                onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`)}
               >
                 {assignment.title}
               </a>
@@ -55,10 +74,28 @@ export default function Assignments() {
                 <b>Due</b> May 13 at 11:59pm | 100pts
               </div>
             </div>
-            <LessonControlButtons />
+            <AssignmentControlButton 
+              assignmentId={assignment._id}
+              deleteAssignment={() => handleDeleteClick(assignment._id)}
+            />
           </li>
         ))}
       </ul>
+
+      <Modal show={showModal} onHide={handleCancelDelete}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this assignment?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCancelDelete}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

@@ -1,7 +1,11 @@
 import { FaPlus } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function AssignmentControl() {
+    const navigate = useNavigate();
+    const { cid } = useParams();
+
     return (
         <div id="wd-assignment-control" style={{display: 'flex'}} className="text-nowrap">
             <span style={{ display: 'flex', flexGrow: 1 }} className="float-end me-1">
@@ -13,11 +17,19 @@ export default function AssignmentControl() {
                     placeholder="Search..."
                 />
             </span>
-            <button id="wd-add-assignment-group" className="btn btn-lg btn-secondary me-1 float-end">
+            <button 
+                id="wd-add-assignment-group" 
+                className="btn btn-lg btn-secondary me-1 float-end"
+                onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments/new`)}
+            >
                 <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                 Group
             </button>
-            <button id="wd-add-assignment" className="btn btn-lg btn-danger me-1 float-end">
+            <button 
+                id="wd-add-assignment" 
+                className="btn btn-lg btn-danger me-1 float-end"
+                onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments/new`)}
+            >
                 <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                 Assignment
             </button>
