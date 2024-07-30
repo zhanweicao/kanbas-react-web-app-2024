@@ -18,14 +18,6 @@ export default function AssignmentControl() {
         />
       </span>
       <button
-        id="wd-add-assignment-group"
-        className="btn btn-lg btn-secondary me-1 float-end"
-        onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments/new`)}
-      >
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-        Group
-      </button>
-      <button
         id="wd-add-assignment"
         className="btn btn-lg btn-danger me-1 float-end"
         onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments/new`)}

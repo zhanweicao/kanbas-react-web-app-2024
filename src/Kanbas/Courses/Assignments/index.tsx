@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { BsGripVertical } from "react-icons/bs";
 import { RxTriangleDown } from 'react-icons/rx';
 import { SlNote } from "react-icons/sl";
-import AssignmentControl from "./AssignmentControl";
 import AssignmentControlButton from "./AssignmentControlButton";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { deleteAssignment } from "./reducer";
+import AssignmentsControls from "./AssignmentsControls";
 
 export default function Assignments() {
   const { cid } = useParams<{ cid: string }>();
@@ -38,7 +38,7 @@ export default function Assignments() {
 
   return (
     <div id="wd-assignments">
-      <AssignmentControl />
+      <AssignmentsControls />
       <br />
       <br />
 

@@ -1,13 +1,12 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { updateAssignment } from "./reducer";
-import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addAssignment } from "./reducer";
+import { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 
-export default function AssignmentEditor() {
-  const { cid, aid } = useParams<{ cid: string, aid: string }>();
-  const navigate = useNavigate();
+export default function AssignmentModalEditor({ show, handleClose, dialogTitle }: any) {
+  const { cid } = useParams<{ cid: string }>();
   const dispatch = useDispatch();
-  const assignments = useSelector((state: any) => state.assignmentsReducer.assignments);
   const [assignment, setAssignment] = useState<any>({
     title: "",
     description: "",
@@ -17,38 +16,17 @@ export default function AssignmentEditor() {
     availableUntil: ""
   });
 
-  useEffect(() => {
-    if (aid) {
-      const foundAssignment = assignments.find(
-        (assignment: any) => assignment.course === cid && assignment._id === aid
-      );
-      if (foundAssignment) {
-        setAssignment(foundAssignment);
-      }
-    }
-  }, [aid, assignments, cid]);
-
   const handleSave = () => {
-    dispatch(updateAssignment({ ...assignment, _id: aid }));
-    navigate(`/Kanbas/Courses/${cid}/Assignments`);
-  };
-
-  const handleCancel = () => {
-    navigate(`/Kanbas/Courses/${cid}/Assignments`);
+    dispatch(addAssignment({ ...assignment, course: cid }));
+    handleClose();
   };
 
   return (
-    <div id="wd-assignments-editor">
-      <br />
-      <br />
-
-      <div id="wd-assignment-title" className="wd-title d-flex justify-content-between p-3 ps-2 bg-secondary">
-        <span>
-          <span className="me-2 fs-3">EDIT ASSIGNMENT</span>
-        </span>
-      </div>
-
-      <div className="container">
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>{dialogTitle}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
         <div className="mb-3">
           <label htmlFor="wd-name" className="form-label">Assignment Name</label>
           <input
@@ -59,7 +37,6 @@ export default function AssignmentEditor() {
             onChange={(e) => setAssignment({ ...assignment, title: e.target.value })}
           />
         </div>
-
         <div className="mb-3">
           <label htmlFor="wd-description" className="form-label">Description</label>
           <textarea
@@ -69,7 +46,6 @@ export default function AssignmentEditor() {
             onChange={(e) => setAssignment({ ...assignment, description: e.target.value })}
           />
         </div>
-
         <div className="row mb-3">
           <label htmlFor="wd-points" className="col-sm-2 col-form-label">Points</label>
           <div className="col-sm-10">
@@ -81,7 +57,6 @@ export default function AssignmentEditor() {
             />
           </div>
         </div>
-
         <div className="row mb-3">
           <label htmlFor="wd-due-date" className="col-sm-2 col-form-label">Due Date</label>
           <div className="col-sm-10">
@@ -94,7 +69,6 @@ export default function AssignmentEditor() {
             />
           </div>
         </div>
-
         <div className="row mb-3">
           <label htmlFor="wd-available-from" className="col-sm-2 col-form-label">Available From</label>
           <div className="col-sm-10">
@@ -107,7 +81,6 @@ export default function AssignmentEditor() {
             />
           </div>
         </div>
-
         <div className="row mb-3">
           <label htmlFor="wd-available-until" className="col-sm-2 col-form-label">Available Until</label>
           <div className="col-sm-10">
@@ -120,16 +93,15 @@ export default function AssignmentEditor() {
             />
           </div>
         </div>
-
-        <div className="row mb-3 justify-content-end">
-          <div className="col-sm-1">
-            <button className="btn" onClick={handleCancel}>Cancel</button>
-          </div>
-          <div className="col-sm-1">
-            <button className="btn btn-danger" onClick={handleSave}>Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={handleSave}>
+          Save
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
