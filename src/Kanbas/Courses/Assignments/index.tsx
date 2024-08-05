@@ -4,10 +4,11 @@ import { BsGripVertical } from "react-icons/bs";
 import { RxTriangleDown } from 'react-icons/rx';
 import { SlNote } from "react-icons/sl";
 import AssignmentControlButton from "./AssignmentControlButton";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
 import AssignmentsControls from "./AssignmentsControls";
+import * as client from "./client"
 
 export default function Assignments() {
   const { cid } = useParams<{ cid: string }>();
@@ -24,7 +25,8 @@ export default function Assignments() {
   };
 
   const handleConfirmDelete = () => {
-    if (assignmentToDelete) {
+    if (cid !== undefined && assignmentToDelete) {
+      client.deleteAssignment(cid, assignmentToDelete)
       dispatch(deleteAssignment(assignmentToDelete));
       setAssignmentToDelete(null);
       setShowModal(false);
@@ -36,9 +38,21 @@ export default function Assignments() {
     setShowModal(false);
   };
 
+  const fetchAssignments = async () => {
+    const assignments = await client.getAssignment(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const handleNavToNewAssignment = () => {
+    navigate(`/Kanbas/Courses/${cid}/Assignments/new`)
+  }
+
   return (
     <div id="wd-assignments">
-      <AssignmentsControls />
+      <AssignmentsControls handleNavToNewAssignment={handleNavToNewAssignment} />
       <br />
       <br />
 

@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updateAssignment } from "./reducer";
+import { updateAssignment, addAssignment } from "./reducer";
 import { useState, useEffect } from "react";
+import * as client from './client'
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams<{ cid: string, aid: string }>();
@@ -18,7 +19,7 @@ export default function AssignmentEditor() {
   });
 
   useEffect(() => {
-    if (aid) {
+    if (aid !== 'new') {
       const foundAssignment = assignments.find(
         (assignment: any) => assignment.course === cid && assignment._id === aid
       );
@@ -29,8 +30,17 @@ export default function AssignmentEditor() {
   }, [aid, assignments, cid]);
 
   const handleSave = () => {
-    dispatch(updateAssignment({ ...assignment, _id: aid }));
-    navigate(`/Kanbas/Courses/${cid}/Assignments`);
+    if (cid === undefined) return
+    if (aid !== 'new') {
+      client.updateAssignment(cid, assignment)
+      dispatch(updateAssignment({ ...assignment, _id: aid }));
+      navigate(`/Kanbas/Courses/${cid}/Assignments`);
+    } else {
+      // create new assignment
+      client.createAssignment(cid, assignment)
+      dispatch(addAssignment(assignment))
+      navigate(`/Kanbas/Courses/${cid}/Assignments`);
+    }
   };
 
   const handleCancel = () => {
