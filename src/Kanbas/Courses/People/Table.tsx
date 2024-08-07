@@ -3,11 +3,27 @@ import * as client from "./client";
 import PeopleDetails from "./Details";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
 export default function PeopleTable() {
     const { cid } = useParams()
     const [users, setUsers] = useState<any[]>([]);
     const [role, setRole] = useState("");
     const [name, setName] = useState("");
+    //Create a user
+    const createUser = async () => {
+        const user = await client.createUser({
+            firstName: "New",
+            lastName: `User${users.length + 1}`,
+            username: `newuser${Date.now()}`,
+            email:`newuser${Date.now()}@example.com`,
+            password: "password123",
+            section: "S101",
+            role: "STUDENT",
+        });
+        setUsers([...users, user]);
+    };
+
+
     const filterUsersByName = async (name: string) => {
         setName(name);
         if (name) {
@@ -37,7 +53,11 @@ export default function PeopleTable() {
     }, []);
     return (
         <div id="wd-people-table">
-            <PeopleDetails fetchUsers = {fetchUsers}/>
+            <button onClick={createUser} className="float-end btn btn-danger wd-add-people">
+                <FaPlus className="me-2" />
+                People
+            </button>
+            <PeopleDetails fetchUsers={fetchUsers} />
             <input onChange={(e) => filterUsersByName(e.target.value)} placeholder="Search people"
                 className="form-control float-start w-25 me-2 wd-filter-by-name" />
             <select value={role} onChange={(e) => filterUsersByRole(e.target.value)}
@@ -55,10 +75,10 @@ export default function PeopleTable() {
                     {users.map((user: any) => (
                         <tr key={user._id}>
                             <td className="wd-full-name text-nowrap">
-                                <Link to ={`/Kanbas/Courses/${cid}/People/${user._id}`}>
-                                
-                                <span className="wd-first-name">{user.firstName}</span>
-                                <span className="wd-last-name">{user.lastName}</span>
+                                <Link to={`/Kanbas/Courses/${cid}/People/${user._id}`}>
+
+                                    <span className="wd-first-name">{user.firstName}</span>
+                                    <span className="wd-last-name">{user.lastName}</span>
                                 </Link>
                             </td>
                             <td className="wd-login-id">{user.loginId}</td>
