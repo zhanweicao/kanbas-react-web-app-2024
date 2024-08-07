@@ -5,8 +5,12 @@ export default function Profile() {
     const [profile, setProfile] = useState<any>({});
     const navigate = useNavigate();
     const fetchProfile = async () => {
-        const account = await client.profile();
-        setProfile(account);
+        try {
+            const account = await client.profile();
+            setProfile(account);
+        } catch (err: any) {
+            navigate("/Kanbas/Account/Signin");
+        }
     };
     const signout = async () => {
         await client.signout();
