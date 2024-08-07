@@ -1,4 +1,6 @@
 import * as client from "./client";
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./reducer";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 export default function Profile() {
@@ -12,8 +14,10 @@ export default function Profile() {
             navigate("/Kanbas/Account/Signin");
         }
     };
+    const dispatch = useDispatch();
     const signout = async () => {
         await client.signout();
+        dispatch(setCurrentUser(null));
         navigate("/Kanbas/Account/Signin");
     };
 
