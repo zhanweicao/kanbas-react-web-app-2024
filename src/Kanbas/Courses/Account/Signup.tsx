@@ -10,7 +10,7 @@ export default function Signup() {
     const navigate = useNavigate();
     const signup = async () => {
         try {
-            const currentUser = await client.signup(user);
+            const currentUser = await client.signup({...user,email:`${user.username}@neu.edu`});
             dispatch(setCurrentUser(currentUser));
             navigate("/Kanbas/Account/Profile");
         } catch (err: any) {
