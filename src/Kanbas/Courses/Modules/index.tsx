@@ -18,6 +18,7 @@ export default function Modules() {
   const dispatch = useDispatch();
 
   const saveModule = async (module: any) => {
+    console.log(module._id);
     const status = await client.updateModule(module);
     dispatch(updateModule(module));
   };

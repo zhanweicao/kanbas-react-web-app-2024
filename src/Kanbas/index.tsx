@@ -18,10 +18,23 @@ export default function Kanbas() {
         fetchCourses();
     }, []);
 
+    const generateCourseNumber = () => {
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const randomNumber = Math.floor(100 + Math.random() * 900);
+        const randomLetters = letters[Math.floor(Math.random() * letters.length)] + letters[Math.floor(Math.random() * letters.length)] + letters[Math.floor(Math.random() * letters.length)];
+        return `${randomLetters}${randomNumber}`;
+    };
+
     const [course, setCourse] = useState<any>({
-        _id: "1234", name: "New Course", number: "New Number",
-        startDate: "2023-09-10", endDate: "2023-12-15", description: "New Description",
+        _id: "1234",
+        name: "New Course",
+        number: generateCourseNumber(), //"New nubmer"
+        startDate: "2023-09-10",
+        endDate: "2023-12-15",
+        description: "New Description",
     });
+
+
     const addNewCourse = async () => {
         const newCourse = await client.createCourse(course);
         setCourses([...courses, newCourse]);
