@@ -82,7 +82,7 @@ export default function QuizDetailEditor() {
                         value={quiz.assignmentGroup}
                         onChange={(e) => setQuiz({ ...quiz, assignmentGroup: e.target.value })}
                     >
-                        <option value="Quizz">Quiz</option>
+                        <option value="Quiz">Quiz</option>
                         <option value="Exam">Exam</option>
                         <option value="Assignment">Assignment</option>
                         <option value="Project">Project</option>
