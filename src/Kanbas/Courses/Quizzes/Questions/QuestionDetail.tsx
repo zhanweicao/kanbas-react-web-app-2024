@@ -32,10 +32,15 @@ export default function QuestionDetail() {
     };
 
     // Determine the correct answer based on the question type
-    const correctAnswer =
-        question.type === "Multiple Choice"
-            ? question.choices.find((choice: any) => choice.correct)?.text
-            : question.correctAnswer;
+    let correctAnswer;
+
+    if (question.type === "Multiple Choice") {
+        correctAnswer = question.choices.find((choice: any) => choice.correct)?.text;
+    } else if (question.type === "True/False") {
+        correctAnswer = question.trueFalseAnswer ? "True" : "False";
+    } else if (question.type === "Fill in the Blank") {
+        correctAnswer = question.fillInBlankAnswers.join(", "); // Display all possible correct answers
+    }
 
     return (
         <div id="wd-question-detail" className="container mt-4">
