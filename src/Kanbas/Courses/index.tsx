@@ -10,6 +10,9 @@ import { FaAlignJustify } from "react-icons/fa";
 import Dashboard from "../Dashboard";
 import PeopleTable from "./People/Table";
 import PeopleDetails from "./People/Details";
+import Quizzes from "./Quizzes";
+import QuizDetailScreen from "./Quizzes/QuizDetailScreen";
+import QuizDetailEditorScreen from "./Quizzes/QuizDetailEditorScreen";
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
@@ -35,6 +38,9 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Piazza" element={<h1>Piazza</h1>} />
             <Route path="Assignments" element={<Assignments />} />
             <Route path="Assignments/:aid" element={<AssignmentEditor />} />
+            <Route path="Quizzes" element={<Quizzes/>} />
+            <Route path="Quizzes/:qid" element={<QuizDetailScreen />} />
+            <Route path="Quizzes/:qid/Edit" element={<QuizDetailEditorScreen />} />
             <Route path="Grades" element={<Grades />} />
             <Route path="People" element={<PeopleTable />} />
             <Route path="People/:uid" element={<PeopleTable />} />
