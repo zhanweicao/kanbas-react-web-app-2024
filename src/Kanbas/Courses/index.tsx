@@ -13,6 +13,9 @@ import PeopleDetails from "./People/Details";
 import Quizzes from "./Quizzes";
 import QuizDetailScreen from "./Quizzes/QuizDetailScreen";
 import QuizDetailEditorScreen from "./Quizzes/QuizDetailEditorScreen";
+import QuestionsScreen from "./Quizzes/Questions/QuestionsScreen";
+import QuestionDetail from "./Quizzes/Questions/QuestionDetail";
+import QuestionDetailEditorScreen from "./Quizzes/Questions/QuestionDetailEditorScreen";
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
@@ -41,6 +44,8 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Quizzes" element={<Quizzes/>} />
             <Route path="Quizzes/:qid" element={<QuizDetailScreen />} />
             <Route path="Quizzes/:qid/Edit" element={<QuizDetailEditorScreen />} />
+            <Route path="Quizzes/:qid/Questions" element={<QuestionsScreen />} />
+            <Route path="Quizzes/:qid/Questions/:questionId" element={<QuestionDetail />} />
             <Route path="Grades" element={<Grades />} />
             <Route path="People" element={<PeopleTable />} />
             <Route path="People/:uid" element={<PeopleTable />} />

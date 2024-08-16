@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link, useLocation } from "react-router-dom";
 import * as client from "./client";
 
-export default function QuizDetailEditor() {
+export default function QuizDetailEditorScreen() {
     const { cid, qid } = useParams<{ cid: string; qid: string }>();
     const navigate = useNavigate();
+    const location = useLocation();
     const [quiz, setQuiz] = useState<any>(null);
 
     useEffect(() => {
@@ -34,12 +35,26 @@ export default function QuizDetailEditor() {
         return <div>Loading...</div>;
     }
 
+    const isDetailTab = location.pathname.endsWith('/Edit');
+
     return (
         <div id="wd-quiz-detail-editor" className="container mt-4">
-            <h2 className="mb-4">Edit Quiz: {quiz.title}</h2>
+            <div className="d-flex justify-content-start mb-4">
+                <Link
+                    to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/Edit`}
+                    className={`btn ${isDetailTab ? 'btn-primary' : 'btn-light'} me-2`}
+                >
+                    Detail
+                </Link>
+                <Link
+                    to={`/Kanbas/Courses/${cid}/Quizzes/${qid}/Questions`}
+                    className={`btn ${!isDetailTab ? 'btn-primary' : 'btn-light'}`}
+                >
+                    Questions
+                </Link>
+            </div>
             <hr />
             <form>
-                {/* Form fields for editing quiz details */}
                 <div className="mb-3">
                     <label className="form-label"><strong>Quiz Title</strong></label>
                     <input
@@ -90,13 +105,8 @@ export default function QuizDetailEditor() {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label"><strong>Points</strong></label>
-                    <input
-                        type="number"
-                        className="form-control"
-                        value={quiz.points}
-                        onChange={(e) => setQuiz({ ...quiz, points: e.target.value })}
-                    />
+                    <label className="form-label"><strong>Total Points</strong></label>
+                    <p className="form-control-plaintext">{quiz.points}</p>
                 </div>
 
                 <div className="mb-3">
