@@ -15,9 +15,8 @@ export default function PeopleTable() {
             firstName: "New",
             lastName: `User${users.length + 1}`,
             username: `newuser${Date.now()}`,
-            email:`newuser${Date.now()}@example.com`,
+            email: `newuser${Date.now()}@example.com`,
             password: "password123",
-            section: "S101",
             role: "STUDENT",
         });
         setUsers([...users, user]);
@@ -68,15 +67,17 @@ export default function PeopleTable() {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Name</th><th>Login ID</th><th>Section</th><th>Role</th><th>Last Activity</th><th>Total Activity</th>
+                       <th>Username</th> <th>Name</th><th>Login ID</th><th>Section</th><th>Role</th><th>Last Activity</th><th>Total Activity</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user: any) => (
                         <tr key={user._id}>
+                            <td className="wd-username">
+                                {user.username}
+                            </td>
                             <td className="wd-full-name text-nowrap">
                                 <Link to={`/Kanbas/Courses/${cid}/People/${user._id}`}>
-
                                     <span className="wd-first-name">{user.firstName}</span>
                                     <span className="wd-last-name">{user.lastName}</span>
                                 </Link>
