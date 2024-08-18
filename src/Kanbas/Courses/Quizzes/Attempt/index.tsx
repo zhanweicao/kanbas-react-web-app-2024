@@ -132,9 +132,19 @@ export default function Attempt() {
         
         console.log("Submitting answerData:", answerData); // Log the answers before sending
         
-        const res = await gradeClient.createGrade(params.cid, params.qid, { answers: answerData });
-        console.log(res);
+        try {
+            const res = await gradeClient.createGrade(params.cid, params.qid, { answers: answerData });
+            console.log("Grade created:", res);
+            
+            if (res && res._id) {
+                // Navigate to the results page with the gid (grade ID)
+                navigate(`/Kanbas/Courses/${params.cid}/Quizzes/Result/${res._id}`);
+            }
+        } catch (error) {
+            console.error("Error creating grade:", error);
+        }
     }
+    
       
       
 

@@ -30,7 +30,8 @@ export const findGradeForQuiz = async (cid: string) => {
 };
 
 // Find a specific grade by grade ID
-export const findGradeById = async (cid: string, quizId: string) => {
-    const response = await axiosWithCredentials.get(`${COURSES_API}/${cid}/quizzes/${quizId}`);
+export const findGradeById = async (cid: string, gid: string) => {
+    const response = await axiosWithCredentials.get(`${COURSES_API}/${cid}/grades/${gid}`);
     return response.data;
 };
+
