@@ -124,26 +124,24 @@ export default function Attempt() {
 
     const onSubmit = async () => {
         if (!params.cid || !params.qid) return;
-        
+    
         const answerData = answer.map((a, index) => ({ 
             ...a, 
             question: questions[index]._id 
         }));
-        
-        console.log("Submitting answerData:", answerData); // Log the answers before sending
         
         try {
             const res = await gradeClient.createGrade(params.cid, params.qid, { answers: answerData });
             console.log("Grade created:", res);
             
             if (res && res._id) {
-                // Navigate to the results page with the gid (grade ID)
-                navigate(`/Kanbas/Courses/${params.cid}/Quizzes/Result/${res._id}`);
+                navigate(`/Kanbas/Courses/${params.cid}/Quizzes/${params.qid}/Result/${res._id}`);
             }
         } catch (error) {
             console.error("Error creating grade:", error);
         }
-    }
+    };
+    
     
       
       

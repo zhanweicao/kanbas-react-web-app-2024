@@ -10,7 +10,6 @@ export const createGrade = async (cid: string, qid: string, gradeData: any) => {
     return response.data;
 };
 
-
 // Update a specific grade by grade ID
 export const updateGrade = async (cid: string, quizId: string, quiz: any) => {
     const response = await axiosWithCredentials.put(`${COURSES_API}/${cid}/quizzes/${quizId}`, quiz);
@@ -30,8 +29,7 @@ export const findGradeForQuiz = async (cid: string) => {
 };
 
 // Find a specific grade by grade ID
-export const findGradeById = async (cid: string, gid: string) => {
-    const response = await axiosWithCredentials.get(`${COURSES_API}/${cid}/grades/${gid}`);
+export const findGradeById = async (cid: string, qid: string, gid: string) => {
+    const response = await axiosWithCredentials.get(`${COURSES_API}/${cid}/quizzes/${qid}/grades/${gid}`);
     return response.data;
 };
-

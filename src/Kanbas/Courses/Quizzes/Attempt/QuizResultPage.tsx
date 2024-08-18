@@ -19,15 +19,19 @@ interface Grade {
 }
 
 export default function QuizResultPage() {
-    const { cid, gid } = useParams<{ cid: string; gid: string }>();
+    const { cid, qid, gid } = useParams<{ cid: string; qid: string; gid: string }>();
+
     const [grade, setGrade] = useState<Grade | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        console.log(`Received params - CID: ${cid}, QID: ${qid}, GID: ${gid}`);
+
         (async function fetchGrade() {
-            if (cid && gid) {
+            if (cid && qid && gid) {
                 try {
-                    const fetchedGrade = await gradeClient.findGradeById(cid, gid);
+                    const fetchedGrade = await gradeClient.findGradeById(cid, qid, gid);
+                    console.log("Fetched grade:", fetchedGrade);
                     setGrade(fetchedGrade);
                     setIsLoading(false);
                 } catch (error) {
@@ -36,7 +40,7 @@ export default function QuizResultPage() {
                 }
             }
         })();
-    }, [cid, gid]);
+    }, [cid, qid, gid]);
 
     if (isLoading) return <p>Loading...</p>;
 
