@@ -18,6 +18,7 @@ import QuestionDetailEditorScreen from "./Quizzes/Questions/QuestionDetailEditor
 import QuestionEditorPage from "./Quizzes/Questions/QuestionEditor/QuestionEditorPage";
 import Attempt from "./Quizzes/Attempt";
 import QuizResultPage from "./Quizzes/Attempt/QuizResultPage";
+import ViewAnswersPage from "./Quizzes/Attempt/ViewAnswersPage.tsx";
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
@@ -50,6 +51,7 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Quizzes/:qid/Questions/:questionId" element={<QuestionDetail />} />
             <Route path="Quizzes/:qid/Questions/:questionId/Edit" element={<QuestionEditorPage />} />
             <Route path="Quizzes/:qid/Result/:gid" element={<QuizResultPage />} />
+            <Route path="Quizzes/:qid/Result/:gid/ViewAnswers" element={<ViewAnswersPage />} />
             <Route path="Grades" element={<Grades />} />
             <Route path="People" element={<PeopleTable />} />
             <Route path="People/:uid" element={<PeopleTable />} />

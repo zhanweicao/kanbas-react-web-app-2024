@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as gradeClient from './client';
+import { useNavigate } from "react-router";
 
 // Define a type for the grade data
 interface GradeAttempt {
@@ -19,6 +20,7 @@ interface Grade {
 }
 
 export default function QuizResultPage() {
+    const navigate = useNavigate();
     const { cid, qid, gid } = useParams<{ cid: string; qid: string; gid: string }>();
 
     const [grade, setGrade] = useState<Grade | null>(null);
@@ -50,7 +52,7 @@ export default function QuizResultPage() {
             {grade ? (
                 <div>
                     <p>Total Score: {grade.attempt.score}</p>
-                    <button onClick={() => {/* Logic to view answers */}}>
+                    <button onClick={() => navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Result/${gid}/ViewAnswers`)}>
                         View My Answers
                     </button>
                 </div>
