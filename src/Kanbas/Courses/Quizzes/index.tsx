@@ -13,7 +13,9 @@ export default function Quizzes() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const quizzes = useSelector((state: any) => state.quizzesReducer.quizzes);
-
+  const currentUser = useSelector(
+    (state: any) => state.accountReducer.currentUser,
+  );
   useEffect(() => {
     if (cid) {
       client.findQuizzesForCourse(cid).then((quizzes) => {
@@ -100,6 +102,7 @@ export default function Quizzes() {
                   onPublishToggle={handlePublishToggle} 
                   published={quiz.published} 
                   onEdit={handleNavToQuizEdit} // Pass the navigation handler for editing
+                  disabled={currentUser.role !== 'FACULTY'}
                 />
               </div>
             </li>

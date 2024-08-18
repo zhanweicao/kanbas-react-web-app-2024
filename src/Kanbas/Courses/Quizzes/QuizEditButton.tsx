@@ -8,12 +8,14 @@ export default function QuizEditButton({
     onPublishToggle,
     published,
     onEdit,  // Add onEdit prop
+    disabled = false,
   }: {
     quizId: string;
     onDelete: (quizId: string) => void;
     onPublishToggle: (quizId: string, newStatus: boolean) => void;
     published: boolean;
     onEdit: (quizId: string) => void;  // Add onEdit type definition
+    disabled?: boolean
   }) {
     const [showModal, setShowModal] = useState(false);
   
@@ -37,7 +39,7 @@ export default function QuizEditButton({
     return (
       <>
         <Dropdown>
-          <Dropdown.Toggle as="button" className="btn btn-light p-0 border-0">
+          <Dropdown.Toggle disabled={disabled} as="button" className="btn btn-light p-0 border-0">
             <IoEllipsisVertical className="fs-4" />
           </Dropdown.Toggle>
   
@@ -71,4 +73,3 @@ export default function QuizEditButton({
       </>
     );
   }
-  

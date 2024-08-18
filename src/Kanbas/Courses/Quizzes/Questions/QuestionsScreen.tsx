@@ -30,7 +30,8 @@ export default function QuestionsScreen() {
 
     const handleNavToNewQuestion = async () => {
         if (cid && qid) {
-            const newQuestion = {}; // Default values as needed
+            const maxOrder = questions.sort((a, b) => b.order - a.order)?.[0]?.order ?? 0
+            const newQuestion = { order: maxOrder + 1 }; // Default values as needed
             const createdQuestion = await client.createQuestion(cid, qid, newQuestion);
             dispatch(addQuestion(createdQuestion));
             // Navigate to the QuestionDetail page after creating the new question
@@ -52,7 +53,7 @@ export default function QuestionsScreen() {
 
     return (
         <div id="wd-questions">
-            <div className="d-flex justify-content-start mb-4">
+            <div className="d-flex justify-content-between mb-4">
                 <div className="d-flex">
                     <button
                         className="btn btn-light me-2"

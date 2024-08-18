@@ -1,4 +1,3 @@
-
 import CoursesNavigation from "./Navigation";
 import Modules from "./Modules";
 import Home from "./Home";
@@ -17,6 +16,7 @@ import QuestionsScreen from "./Quizzes/Questions/QuestionsScreen";
 import QuestionDetail from "./Quizzes/Questions/QuestionDetail";
 import QuestionDetailEditorScreen from "./Quizzes/Questions/QuestionDetailEditorScreen";
 import QuestionEditorPage from "./Quizzes/Questions/QuestionEditor/QuestionEditorPage";
+import Attempt from "./Quizzes/Attempt";
 export default function Courses({ courses }: { courses: any[]; }) {
   const { cid } = useParams();
   const course = courses.find((course) => course._id === cid);
@@ -51,6 +51,7 @@ export default function Courses({ courses }: { courses: any[]; }) {
             <Route path="Grades" element={<Grades />} />
             <Route path="People" element={<PeopleTable />} />
             <Route path="People/:uid" element={<PeopleTable />} />
+            <Route path="Quizzes/:qid/Attempt" element={<Attempt />}></Route>
           </Routes>
         </div>
       </div>

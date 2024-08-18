@@ -1,4 +1,5 @@
-import axios from "axios";
+import _axios from "axios";
+const axios = _axios.create({ withCredentials: true });
 const REMOTE_SERVER = process.env.REACT_APP_REMOTE_SERVER;
 const COURSES_API = `${REMOTE_SERVER}/api/courses`;
 export const fetchAllCourses = async () => {
@@ -17,7 +18,3 @@ export const updateCourse = async (course: any) => {
     const response = await axios.put(`${COURSES_API}/${course._id}`, course);
     return response.data;
 };
-
-
-
-

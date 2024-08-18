@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import * as client from "./client";
+import { useSelector } from "react-redux";
 
 export default function QuizDetailScreen() {
     const { cid, qid } = useParams<{ cid: string; qid: string }>();
     const navigate = useNavigate();
     const [quiz, setQuiz] = useState<any>(null);
-
+    const currentUser = useSelector(
+      (state: any) => state.accountReducer.currentUser,
+    );
     useEffect(() => {
         if (cid && qid) {
             client.findQuizById(cid, qid).then((quizData) => {
@@ -20,7 +23,7 @@ export default function QuizDetailScreen() {
     };
 
     const handlePreview = () => {
-        navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Preview`);
+        navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Attempt`);
     };
 
     const handleEdit = () => {
@@ -37,8 +40,9 @@ export default function QuizDetailScreen() {
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h2>{quiz.title}</h2>
                 <div>
-                    <button className="btn btn-secondary me-2" onClick={handlePreview}>Preview</button>
-                    <button className="btn btn-primary" onClick={handleEdit}>Edit</button>
+                    {currentUser.role === 'FACULTY' && <button className="btn btn-secondary me-2" onClick={handlePreview}>Preview</button>}
+                    {currentUser.role === 'STUDENT' && <button disabled={!quiz.published} className="btn btn-secondary me-2" onClick={handlePreview}>Take the quiz</button>}
+                    {currentUser.role === 'FACULTY' && <button className="btn btn-primary" onClick={handleEdit}>Edit</button>}
                 </div>
             </div>
             <hr />
