@@ -16,6 +16,7 @@ export default function Quizzes() {
   const currentUser = useSelector(
     (state: any) => state.accountReducer.currentUser,
   );
+  
   useEffect(() => {
     if (cid) {
       client.findQuizzesForCourse(cid).then((quizzes) => {
@@ -59,6 +60,27 @@ export default function Quizzes() {
     }
   };
 
+  // Function to determine quiz availability status
+  const getAvailabilityStatus = (quiz: any) => {
+    const currentDate = new Date();
+    const availableDate = quiz.availableDate ? new Date(quiz.availableDate) : null;
+    const untilDate = quiz.untilDate ? new Date(quiz.untilDate) : null;
+
+    if (!availableDate) {
+      return "No availability date set";
+    }
+
+    if (currentDate < availableDate) {
+      return `Not available until ${availableDate.toLocaleDateString()}`;
+    }
+
+    if (untilDate && currentDate > untilDate) {
+      return "Closed";
+    }
+
+    return "Available";
+  };
+
   return (
     <div id="wd-quizzes">
       <QuizControls handleNavToNewQuiz={handleNavToNewQuiz} />
@@ -90,7 +112,7 @@ export default function Quizzes() {
                 </a>
                 <div>
                   <b className="text-danger">{quiz.published ? "Published" : "Unpublished"}</b> | 
-                  <b> Due</b> {quiz.dueDate ? new Date(quiz.dueDate).toLocaleDateString() : "No due date set"} | 
+                  <b> {getAvailabilityStatus(quiz)}</b> | 
                   {quiz.points}pts | {quiz.numberOfQuestions || 0} questions
                 </div>
               </div>
