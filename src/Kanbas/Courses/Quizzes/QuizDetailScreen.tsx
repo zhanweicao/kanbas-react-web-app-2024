@@ -55,6 +55,10 @@ export default function QuizDetailScreen() {
                 <div className="col-md-8">{quiz.points}</div>
             </div>
             <div className="row mb-3">
+                <div className="col-md-4"><strong>Total Question</strong></div>
+                <div className="col-md-8">{quiz.numberOfQuestions}</div>
+            </div>
+            <div className="row mb-3">
                 <div className="col-md-4"><strong>Assignment Group</strong></div>
                 <div className="col-md-8">{quiz.assignmentGroup}</div>
             </div>
@@ -69,6 +73,10 @@ export default function QuizDetailScreen() {
             <div className="row mb-3">
                 <div className="col-md-4"><strong>Multiple Attempts</strong></div>
                 <div className="col-md-8">{quiz.multipleAttempts ? "Yes" : "No"}</div>
+            </div>
+            <div className="row mb-3">
+                <div className="col-md-4"><strong>Attempts</strong></div>
+                <div className="col-md-8">{quiz.maxAttempts}</div>
             </div>
             <div className="row mb-3">
                 <div className="col-md-4"><strong>Show Correct Answers</strong></div>

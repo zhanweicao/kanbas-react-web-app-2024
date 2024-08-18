@@ -37,6 +37,16 @@ export default function QuizDetailEditorScreen() {
 
     const isDetailTab = location.pathname.endsWith('/Edit');
 
+    const handleMultipleAttemptsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const isChecked = e.target.checked;
+        const updatedQuiz = {
+            ...quiz,
+            multipleAttempts: isChecked,
+            maxAttempts: isChecked ? quiz.maxAttempts : 1 // Set maxAttempts to 1 if not allowing multiple attempts
+        };
+        setQuiz(updatedQuiz);
+    };
+
     return (
         <div id="wd-quiz-detail-editor" className="container mt-4">
             <div className="d-flex justify-content-start mb-4">
@@ -135,7 +145,7 @@ export default function QuizDetailEditorScreen() {
                         type="checkbox"
                         className="form-check-input"
                         checked={quiz.multipleAttempts}
-                        onChange={(e) => setQuiz({ ...quiz, multipleAttempts: e.target.checked })}
+                        onChange={handleMultipleAttemptsChange}
                     />
                 </div>
 
@@ -146,7 +156,7 @@ export default function QuizDetailEditorScreen() {
                         className="form-control"
                         value={quiz.maxAttempts}
                         onChange={(e) => setQuiz({ ...quiz, maxAttempts: e.target.value })}
-                        disabled={!quiz.multipleAttempts}
+                        disabled={!quiz.multipleAttempts} // Disable input if multiple attempts are not allowed
                     />
                 </div>
 

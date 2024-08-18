@@ -91,7 +91,7 @@ export default function Quizzes() {
                 <div>
                   <b className="text-danger">{quiz.published ? "Published" : "Unpublished"}</b> | 
                   <b> Due</b> {quiz.dueDate ? new Date(quiz.dueDate).toLocaleDateString() : "No due date set"} | 
-                  {quiz.points}pts | {quiz.questions?.length || 0} questions
+                  {quiz.points}pts | {quiz.numberOfQuestions || 0} questions
                 </div>
               </div>
               <div className="d-flex align-items-center">
