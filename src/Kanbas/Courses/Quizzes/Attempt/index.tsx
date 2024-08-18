@@ -3,8 +3,10 @@ import * as questionClient from "../Questions/client";
 import * as gradeClient from './client'
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Attempt() {
+    const navigate = useNavigate();
     const params = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const currentUser = useSelector(
@@ -121,11 +123,20 @@ export default function Attempt() {
     };
 
     const onSubmit = async () => {
-        if (!params.cid || !params.qid) return
-        const answerData = answer.map((a, index) => ({ ...a, question: questions[index]._id }))
-        const res = await gradeClient.createGrade(params.cid, params.qid, answerData);
-        console.log(res)
+        if (!params.cid || !params.qid) return;
+        
+        const answerData = answer.map((a, index) => ({ 
+            ...a, 
+            question: questions[index]._id 
+        }));
+        
+        console.log("Submitting answerData:", answerData); // Log the answers before sending
+        
+        const res = await gradeClient.createGrade(params.cid, params.qid, { answers: answerData });
+        console.log(res);
     }
+      
+      
 
     if (isLoading) return <p>Loading</p >;
     const question = questions[currentIndex];
