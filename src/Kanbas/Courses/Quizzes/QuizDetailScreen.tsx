@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import * as client from "./client";
+import * as client from "./client"; // Correct client for fetching quiz details
+import * as gradeClient from "./Attempt/client"; // Correct client for fetching grades
 import { useSelector } from "react-redux";
 
 export default function QuizDetailScreen() {
     const { cid, qid } = useParams<{ cid: string; qid: string }>();
     const navigate = useNavigate();
     const [quiz, setQuiz] = useState<any>(null);
+    const [latestGrade, setLatestGrade] = useState<any>(null);
     const currentUser = useSelector(
-      (state: any) => state.accountReducer.currentUser,
+        (state: any) => state.accountReducer.currentUser,
     );
+
     useEffect(() => {
         if (cid && qid) {
             client.findQuizById(cid, qid).then((quizData) => {
                 setQuiz(quizData);
             });
+
+            // Fetch the latest grade for the current user
+            gradeClient.findLatestGradeForQuiz(cid, qid, currentUser._id)
+                .then((gradeData) => {
+                    setLatestGrade(gradeData);
+                })
+                .catch((error) => {
+                    if (error.response && error.response.status === 404) {
+                        // If the grade is not found, it means the student hasn't taken the quiz yet
+                        console.log("No previous grade found, student hasn't taken the quiz yet.");
+                    } else {
+                        console.error("Error fetching the latest grade:", error);
+                    }
+                });
         }
-    }, [cid, qid]);
+    }, [cid, qid, currentUser]);
 
     const handleBack = () => {
         navigate(`/Kanbas/Courses/${cid}/Quizzes`);
@@ -28,6 +45,12 @@ export default function QuizDetailScreen() {
 
     const handleEdit = () => {
         navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Edit`);
+    };
+
+    const handleViewResult = () => {
+        if (latestGrade) {
+            navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}/Result/${latestGrade._id}`);
+        }
     };
 
     if (!quiz) {
@@ -42,7 +65,8 @@ export default function QuizDetailScreen() {
                 <div>
                     {currentUser.role === 'FACULTY' && <button className="btn btn-secondary me-2" onClick={handlePreview}>Preview</button>}
                     {currentUser.role === 'STUDENT' && <button disabled={!quiz.published} className="btn btn-secondary me-2" onClick={handlePreview}>Take the quiz</button>}
-                    {currentUser.role === 'FACULTY' && <button className="btn btn-primary" onClick={handleEdit}>Edit</button>}
+                    {currentUser.role === 'FACULTY' && <button className="btn btn-primary me-2" onClick={handleEdit}>Edit</button>}
+                    {latestGrade && <button className="btn btn-info" onClick={handleViewResult}>View Result</button>}
                 </div>
             </div>
             <hr />
@@ -55,7 +79,7 @@ export default function QuizDetailScreen() {
                 <div className="col-md-8">{quiz.points}</div>
             </div>
             <div className="row mb-3">
-                <div className="col-md-4"><strong>Total Question</strong></div>
+                <div className="col-md-4"><strong>Total Questions</strong></div>
                 <div className="col-md-8">{quiz.numberOfQuestions}</div>
             </div>
             <div className="row mb-3">

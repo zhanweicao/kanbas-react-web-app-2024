@@ -33,3 +33,10 @@ export const findGradeById = async (cid: string, qid: string, gid: string) => {
     const response = await axiosWithCredentials.get(`${COURSES_API}/${cid}/quizzes/${qid}/grades/${gid}`);
     return response.data;
 };
+
+// Find the latest grade for a specific quiz and user
+export const findLatestGradeForQuiz = async (cid: string, qid: string, userId: string) => {
+    const response = await axiosWithCredentials.get(`${COURSES_API}/${cid}/quizzes/${qid}/grades/latest/${userId}`);
+    return response.data;
+};
+
