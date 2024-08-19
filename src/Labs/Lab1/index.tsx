@@ -2,7 +2,7 @@ export default function Lab1() {
     return (
         <div id="wd-lab1">
             <h2>Lab 1</h2>
-            <h3>HTML Examples</h3>
+            <h3>HTML Example</h3>
             <div id="wd-h-tag">
                 <h4>Heading Tags</h4>
                 Text documents are often broken up into several sections and subsections. Each section is usually
@@ -284,10 +284,9 @@ export default function Lab1() {
             Please
             <a id="wd-lipsum" href="https://www.lipsum.com">click here</a>
             to get dummy text<br/>
-            <h4>Anchor tag</h4>
-            Please
-            <a id="wd-github" href="https://github.com/zhanweicao/kanbas-react-web-app-2024">click here</a>
-            to get dummy text<br/>
+            <h4>My Github Repository</h4>
+            <a id="wd-github" href="https://github.com/zhanweicao/kanbas-react-web-app-2024">Github</a>
+            <br/>
 
         </div>
     );
